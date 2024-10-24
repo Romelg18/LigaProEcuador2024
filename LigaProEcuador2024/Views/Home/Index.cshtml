@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<LigaProEcuador2024.Models.Equipo> 
+
+@{
+    ViewData["Title"] = "Equipos";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Equipos de la Liga Pro 2024</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo equipo</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estadio.Nombre) 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ciudad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estadio.Nombre) 
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEquipo" class="btn btn-warning">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdEquipo" class="btn btn-info">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEquipo" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
